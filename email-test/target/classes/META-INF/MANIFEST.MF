@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Built-By: ADMIN
+Build-Jdk: 17.0.1
+Implementation-Title: Email-Notification-Service
+Implementation-Version: 0.0.1-SNAPSHOT
+Implementation-Vendor-Id: org.email.notification
+Implementation-URL: https://projects.spring.io/spring-boot/#/spring-boot
+ -starter-parent/Email-Notification-Service
+Created-By: Maven Integration for Eclipse
+

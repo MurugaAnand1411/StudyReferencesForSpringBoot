@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html xmlns:layout="http://www.w3.org/1999/xhtml"
+	layout:decorate="~{fragments/main_layout}">
+<head>
+<title>EComm app - My purchases</title>
+</head>
+<body>
+	<div layout:fragment="content" class="container">
+    <h1>My Orders</h1>
+    <br/><br/>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Product Name</th>
+                <th>Quantity</th>
+                <th>Amount</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="sale : ${listSale}">
+                <td th:text="${sale.id}">ID</td>
+                <td th:text="${sale.product.name}">Product Name</td>
+                <td th:text="${sale.quantity}">Quantity</td>
+                <td th:text="${sale.amount}">Amount</td>
+                <td>
+                    
+                    
+                    <!--   <a th:href="/@{'/deletesale/' + ${sale.id}}">Cancel Purchase</a> -->
+                    <a th:href="@{'/deletesale/' + ${sale.id}}">Delete</a>
+                	&nbsp;&nbsp;&nbsp;
+                    
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>  
+</body>
+</html>

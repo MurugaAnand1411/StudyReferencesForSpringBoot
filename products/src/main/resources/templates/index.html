@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html xmlns:layout="http://www.w3.org/1999/xhtml"
+	layout:decorate="~{fragments/main_layout}">
+<head>
+<title>EComm app</title>
+</head>
+<body>
+	<div layout:fragment="content" class="container">
+
+		<div class="container">
+				<h1>Product List</h1>
+				
+				<table class="table">
+					<thead>
+						<tr>
+							<th>Product ID</th>
+							<th>Name</th>
+							<th>Brand</th>
+							<th>Made In</th>
+							<th>Price</th>
+							<th>Actions</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="product : ${listProducts}">
+							<td th:text="${product.id}">Product ID</td>
+							<td th:text="${product.name}">Name</td>
+							<td th:text="${product.brand}">Brand</td>
+							<td th:text="${product.madein}">Made in</td>
+							<td th:text="${product.price}">Price</td>
+							<td>
+								&nbsp;&nbsp;&nbsp; <a th:href="@{'/buy/' + ${product.id}}">Buy</a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+
+		</div>
+	</div>
+</body>
+</html>
+
+
+

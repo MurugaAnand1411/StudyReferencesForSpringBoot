@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" type="text/css"
+	th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}" />
+</head>
+<body>
+    <!--/*  Multiple fragments may be defined in one file */-->
+    <div th:fragment="footer" th:align="center">
+        &copy; <span th:text="${#temporals.format(#temporals.createNow(), 'yyyy')}">2022</span>
+        <span>The ECommerce App</span>
+    </div>
+    <div th:fragment="footer-admin" th:align="center">
+        &copy; <span th:text="${#temporals.format(#temporals.createNow(), 'yyyy')}">2022</span>
+        <span>The Ecommerce App - Admin interface </span><span th:text="${@environment.getProperty('app.version')}"></span>
+    </div>
+</body>
+</html>

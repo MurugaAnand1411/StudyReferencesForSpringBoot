@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html xmlns:layout="http://www.w3.org/1999/xhtml"
+	layout:decorate="~{fragments/main_layout}">
+<head>
+<title>EComm app - Edit product</title>
+</head>
+<body>
+	<div layout:fragment="content" class="container">
+		<h1>Enter New Sale</h1>
+		<br />
+		<form action="#" th:action="@{/savesale}" th:object="${sale}"
+			method="post">
+
+			<table class="table">
+				<tr>
+					<td>Product Name:</td>
+					<td><input type="text" th:field="*{product.name}" /> <input
+						type="hidden" th:field="*{product.id}" /></td>
+				</tr>
+				<tr>
+					<td>Quantity:</td>
+					<td><input type="text" th:field="*{quantity}" /></td>
+				</tr>
+				<tr>
+					<td>Amount:</td>
+					<td><input type="text" th:field="*{amount}" /></td>
+				</tr>
+				<tr>
+					<td colspan="2"><button type="submit">Save</button></td>
+				</tr>
+			</table>
+		</form>
+	</div>
+
+</body>
+</html>
