@@ -1,0 +1,64 @@
+<div class="card" style="margin: 20px;">
+    <div class="card-header">
+        <h4 class="card-title">Add Employee</h4>
+    </div>
+    <div class="card-content">
+        <div class="card-body">
+            <div style="margin: 20px;">
+                <form [formGroup]="userForm" (ngSubmit)="userForm.valid && onSubmit()">
+                    <div fxLayout="column">
+                        <mat-form-field appearance="outline">
+                            <mat-label>First Name*</mat-label>
+                            <input type="text" matInput formControlName="firstname">
+                            <mat-error>{{ errorMessage('firstname','First Name') }}</mat-error>
+                        </mat-form-field>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Last Name*</mat-label>
+                            <input type="text" matInput formControlName="lastname">
+                            <mat-error>{{ errorMessage('lastname','Last Name') }}</mat-error>
+                        </mat-form-field>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Mobile No*</mat-label>
+                            <input type="text" matInput formControlName="mobileno">
+                            <mat-error>{{ errorMessage('mobileno','Mobile No') }}</mat-error>
+                        </mat-form-field>
+                        <mat-form-field appearance="outline">
+                            <mat-label>EmailId*</mat-label>
+                            <input type="email" matInput formControlName="emailId">
+                            <mat-error>{{ errorMessage('emailId','Email ID') }}</mat-error>
+                        </mat-form-field>
+                        <mat-form-field appearance="outline">
+
+                            <mat-label>Password*</mat-label>
+                            <input matInput [type]="hide ? 'password' : 'text'" placeholder="Password"
+                                formControlName="password">
+                            <mat-error>{{ errorMessage('password','Password') }}</mat-error>
+                            <mat-icon color="primary" class="show" matSuffix (click)="hide = !hide"
+                                [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">{{hide ? 'visibility_off'
+                                : 'visibility'}}</mat-icon>
+                        </mat-form-field>
+                        <ng-container formArrayName="roles">
+                        <mat-form-field appearance="outline" [formGroupName]="0">
+                            <mat-label>Roles*</mat-label>
+                            <mat-select [(value)]="selectRoles" formControlName="name" >
+                                <mat-option *ngFor="let role of roles" [value]="role.value">
+                                    {{role.name}}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error>{{ errorMessage('roles','Roles') }}</mat-error>
+                        </mat-form-field>
+                    </ng-container>
+                    </div>
+                    <div fxLayoutGap="20px" fxLayout="row" fxLayoutAlign="end">
+                        <button type="submit" mat-raised-button color="primary">
+                            <span>Save</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#9a58d5" type="line-scale" [fullScreen]="true">
+    <p style="color: white">Saving... </p>
+</ngx-spinner>

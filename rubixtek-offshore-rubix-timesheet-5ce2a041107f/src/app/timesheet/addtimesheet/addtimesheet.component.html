@@ -1,0 +1,60 @@
+
+<div class="container" fxLayout="column" fxLayoutAlign="start stretch">
+    <mat-card>
+        <mat-card-content>
+            <form [formGroup]="timesheetForm" (ngSubmit)="timesheetForm.valid&&onSubmit()">
+                <div fxLayout="column">
+                    <mat-form-field appearance="outline">
+                        <mat-label>TeamName</mat-label>
+                        <input matInput formControlName="teamname" required>
+                       
+                    </mat-form-field>
+                    <div class="space-block"fxLayout="row wrap" fxLayoutAlign="start center" >
+                    <div id="datepicker-container" >
+                        <p>Pick the week:</p>
+                        <app-week-picker  [formControl]="formControl" (sendDate)=addStart($event) name="control"></app-week-picker>
+                    </div> 
+                    <div  >   
+                    <mat-form-field  class="margin-block" appearance="outline">
+                        <mat-label>Start Date</mat-label>
+                        <input matInput [(ngModel)]="initialdate"  formControlName="startDate" readonly>
+                    </mat-form-field>
+                    </div>
+                    <div   >
+                    <mat-form-field class="margin-block"  appearance="outline">
+                        <mat-label>End Date</mat-label>
+                        <input matInput  [(ngModel)]="finaldate" formControlName="endDate" readonly>
+                    </mat-form-field>
+                    </div>
+                    </div>
+                    <!-- <mat-form-field appearance="outline">
+
+                        <mat-label>TimesheetApprover</mat-label>
+                        <input matInput required formControlName="timesheetApprover">
+                       
+                    </mat-form-field> -->
+                    <mat-form-field appearance="outline">
+                        <mat-label>Supervisor*</mat-label>
+                        <mat-select [(value)]="selectSupervisor" formControlName="timesheetApprover" >
+                            <mat-option *ngFor="let sup of supervisor" [value]="sup.emailId">
+                                {{sup.firstname}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    
+
+
+                </div>
+                <div fxLayoutAlign="center">
+                    <button type="submit" mat-raised-button color="primary">
+
+                        <span>Save</span>
+                    </button>
+                </div>
+            </form>
+        </mat-card-content>
+    </mat-card>
+</div>
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#9a58d5" type="line-scale" [fullScreen]="true">
+    <p style="color: white"> Saving... </p>
+</ngx-spinner>

@@ -1,0 +1,21 @@
+
+<div style="margin: 20px;" fxLayout="row" fxLayoutAlign="end center">
+  <button mat-button mat-raised-button (click)="editDialog(0)" color="primary">Add Project</button>&nbsp;
+</div>
+<div   style="margin:10px;">
+  <app-tables  *ngIf="projectdetails!=null" [tableData]="projectdetails"
+              [tableColumns]="tableColumns" 
+              [tableName]="'Project Management'" 
+              [tableSpec]="'projectList'"  
+              [isFilterable]="true"
+              [isPageable]="true"
+              [paginationSizes]="[2,4,6]"
+              [defaultPageSize]="4"
+              (sort)="sort($event)"
+              [projectIcon]="'edit'"
+              (update)="editDialog($event)"
+              (delete)="deleteDialog($event)"
+              (view)="viewProject($event)"
+             
+  ></app-tables>
+</div>

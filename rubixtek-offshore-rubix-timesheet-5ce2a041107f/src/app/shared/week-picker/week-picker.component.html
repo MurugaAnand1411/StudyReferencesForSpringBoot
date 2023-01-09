@@ -1,0 +1,19 @@
+<div id="datepicker-container">
+    <ngb-datepicker
+    (dateSelect)="onDateSelection($event)"
+      [showWeekNumbers]="true"
+      [dayTemplate]="t"
+    >
+    </ngb-datepicker>
+  </div>
+  <ng-template #t let-date let-focused="focused">
+    <span
+      class="custom-day"
+      [class.focused]="focused"
+      [class.range]="isRange(date)"
+    >
+      {{ date.day }}
+
+    </span>
+  </ng-template>
+ 

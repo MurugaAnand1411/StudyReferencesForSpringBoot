@@ -1,0 +1,210 @@
+<div>
+    EmailId: {{employee.emailId}}
+</div>
+<div>
+    Mobile No: {{employee.mobileno}}
+</div>
+<div>
+    First Name: {{employee.firstname}}
+</div>
+<div fxLayout="row" fxLayoutAlign="start center"  >
+    <div *ngIf="employee.supervisor!=null">
+        Supervisor: {{employee.supervisor.firstname}}
+    </div>
+    <div fxFlex="50"></div>
+    <div fxFlex="20" *ngIf="employee.supervisor!=null"><button *ngIf="!editSupervisor"  mat-raised-button color="primary" (click)="changeMode()">Edit</button></div>
+</div>
+<div fxLayout="row" fxLayoutAlign="space-around center" *ngIf="editSupervisor" >
+    <div>
+            <mat-form-field appearance="outline">
+                <mat-label>Supervisor*</mat-label>
+                <mat-select [(value)]="selectSupervisor" >
+                    <mat-option *ngFor="let sup of supervisor" [value]="sup.employeeId">
+                        {{sup.firstname}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    <div> <button  mat-raised-button color="primary" (click)="saveMode()">Save</button></div>
+    <div><button  mat-raised-button color="primary" (click)="changeMode()">Cancel</button></div>
+</div>
+<div style="margin: 50px;"></div>
+<div fxLayout="row" fxLayoutAlign="start center"  *ngIf="employee.supervisor!=null" >
+    <div >
+        Roles: {{employee.roles[0].name}}
+    </div>
+    <div fxFlex="45"></div>
+    <div fxFlex="20"><button *ngIf="!editRoles"  mat-raised-button color="primary" (click)="changeRolesMode()">Edit</button></div>
+</div>
+<div fxLayout="row" fxLayoutAlign="space-around center" *ngIf="editRoles" >
+    <div>
+            <mat-form-field appearance="outline">
+                <mat-label>Roles*</mat-label>
+                <mat-select [(value)]="selectRoles" >
+                    <mat-option *ngFor="let role of roles" [value]="role">
+                        {{role}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    <div> <button  mat-raised-button color="primary" (click)="saveRolesMode()">Save</button></div>
+    <div><button  mat-raised-button color="primary" (click)="changeRolesMode()">Cancel</button></div>
+</div>
+
+<mat-horizontal-stepper #stepper>
+    <mat-step [stepControl]="userForm">
+        <form [formGroup]="userForm" (ngSubmit)="userForm.valid&&onSubmit">
+            <ng-template matStepLabel>Personal Details</ng-template>
+            <div fxLayout="column">
+                <mat-form-field appearance="outline">
+                    <mat-label>First Name*</mat-label>
+                    <input type="email" matInput formControlName="firstname">
+
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Last Name*</mat-label>
+                    <input type="text" matInput formControlName="lastname">
+
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Mobile No*</mat-label>
+                    <input type="text" matInput formControlName="mobileno">
+
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>EmailId*</mat-label>
+                    <input type="text" matInput formControlName="emailId">
+
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Date of Birth*</mat-label>
+                    <input matInput [matDatepicker]="picker" formControlName="dateOfBirth"  [(ngModel)]="dateb">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Blood Group*</mat-label>
+                    <input type="text" matInput formControlName="bloodgroup">
+
+                </mat-form-field>
+                <div formArrayName="address">
+
+                    <div *ngFor="let group of addressArray.controls; let i = index;" [formGroupName]="i">
+                        <div fxLayout="column" fxLayoutAlign="start stretch">
+                            <mat-form-field appearance="outline">
+
+                                <mat-label> Address*</mat-label>
+                                <textarea matInput formControlName="address"></textarea>
+                            </mat-form-field>
+                        </div>
+                        <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="33px">
+                            <mat-form-field appearance="outline">
+
+                                <mat-label>City*</mat-label>
+                                <input type="text" matInput placeholder="City" formControlName="city">
+                            </mat-form-field>
+
+                            <mat-form-field appearance="outline">
+
+                                <mat-label>State*</mat-label>
+                                <input type="text" matInput placeholder="State" formControlName="state">
+
+                            </mat-form-field>
+
+                            <mat-form-field appearance="outline">
+
+                                <mat-label>ZipCode*</mat-label>
+                                <input type="text" matInput placeholder="ZipCode" formControlName="zipCode">
+
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            <div>
+                <button mat-button class="log-button" [disabled]="userForm.invalid" matStepperNext>Next</button>
+            </div>
+        </form>
+
+    </mat-step>
+    <mat-step [stepControl]="documentForm">
+
+        <form [formGroup]="documentForm">
+            <ng-template matStepLabel>Bank Details</ng-template>
+            <div fxLayout="column">
+                <mat-form-field appearance="outline">
+                    <mat-label>Bank Name*</mat-label>
+                    <input type="text" matInput formControlName="bankName">
+
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Branch Name*</mat-label>
+                    <input type="text" matInput formControlName="branchName">
+
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Bank Account No*</mat-label>
+                    <input type="text" matInput formControlName="accountNo">
+
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>IFSC Code*</mat-label>
+                    <input type="text" matInput formControlName="ifscCode">
+
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Pan Card No*</mat-label>
+                    <input type="text" matInput formControlName="pancardNo">
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Adhaar Card No*</mat-label>
+                    <input type="text" matInput formControlName="adhaarNo">
+                </mat-form-field>
+            </div>
+            <div>
+                <button mat-button matStepperPrevious>Back</button>
+                <button mat-button matStepperNext>Next</button>
+            </div>
+
+        </form>
+
+    </mat-step>
+    <mat-step [stepControl]="officialForm">
+        <form [formGroup]="officialForm">
+            <ng-template matStepLabel>Official Details</ng-template>
+            <div fxLayout="column">
+                <mat-form-field appearance="outline">
+                    <mat-label>Date Of Join*</mat-label>
+                    <input matInput [matDatepicker]="pickerDJ" formControlName="DOJ" [(ngModel)]="datej">
+                    <mat-datepicker-toggle matSuffix [for]="pickerDJ"></mat-datepicker-toggle>
+                    <mat-datepicker #pickerDJ></mat-datepicker>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Designation*</mat-label>
+                    <input type="text" matInput formControlName="designation">
+
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Salary*</mat-label>
+                    <input type="text" matInput formControlName="salary">
+
+                </mat-form-field>
+            </div>
+            <div>
+                <button mat-button matStepperPrevious>Back</button>
+                <button mat-button matStepperNext>Next</button>
+            </div>
+        </form>
+    </mat-step>
+    <mat-step>
+        <ng-template matStepLabel>Done</ng-template>
+        <p>You are now done.</p>
+        <div>
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button (click)="updateEmployee()">Save</button>
+        </div>
+    </mat-step>
+</mat-horizontal-stepper>

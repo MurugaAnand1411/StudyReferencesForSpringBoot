@@ -1,0 +1,134 @@
+<div fxLayoutAlign="center center" class="center-content">
+    <mat-card class="card-login">
+
+        <div fxLayoutAlign="center center"  ></div>
+        <mat-card-content class="card-content">
+            <mat-tab-group>
+                <mat-tab label="Personal Details">
+                    <div *ngIf="!editPersonal">
+                        <div  class="align-left-block"><button mat-button (click)="editPersonal=true">Edit</button></div>
+                        <!-- <div class="align-block">FirstName:{{employee.firstname}}</div>
+                        <div class="align-block">LastName:{{employee.lastname}}</div>
+                        <div class="align-block">Mobile No:{{employee.mobileno}}</div> -->
+                        <div class="align-block">Email Id:{{employee.emailId}}</div>
+                        <!-- <div class="align-block">Address:{{employee.address}}</div> -->
+                    </div>
+                    <div *ngIf="editPersonal">
+                    <form [formGroup]="userForm" class="formStyle" (ngSubmit)="userForm.valid">
+                        <mat-form-field class="login-matformfield-borders">
+                            <mat-label>First Name*</mat-label>
+                            <input type="email" matInput placeholder="First name" formControlName="firstname">
+                            
+                        </mat-form-field>
+                        <mat-form-field class="login-matformfield-borders ">
+                            <mat-label>Last Name*</mat-label>
+                            <input type="text" matInput placeholder="Last name" formControlName="lastname">
+                           
+                        </mat-form-field>
+                        <mat-form-field class="login-matformfield-borders ">
+                            <mat-label>Mobile No*</mat-label>
+                            <input type="text" matInput placeholder="Mobile No" formControlName="mobileno">
+                           
+                        </mat-form-field>
+                        <mat-form-field class="login-matformfield-borders ">
+                            <mat-label>EmailId*</mat-label>
+                            <input type="text" matInput placeholder="Email Id" formControlName="emailId">
+                           
+                        </mat-form-field>
+                        <mat-form-field class="login-matformfield-borders ">
+                            <mat-label>Address*</mat-label>
+                            <input type="text" matInput placeholder="Address" formControlName="address">
+                            <textarea matInput placeholder="Address"></textarea>
+                        </mat-form-field>
+                        <button mat-button >Edit</button>
+                    </form>
+                </div>
+                </mat-tab>
+
+                <mat-tab label="Document Details">
+
+                </mat-tab>
+
+            </mat-tab-group>
+
+        </mat-card-content>
+
+    </mat-card>
+
+</div>
+
+<mat-horizontal-stepper #stepper>
+    <mat-step [stepControl]="userForm">
+        <form [formGroup]="userForm" (ngSubmit)="userForm.valid&&onSubmit">
+            <ng-template matStepLabel>Fill out your Personal Details</ng-template>
+            <div fxLayout="column">
+                <mat-form-field appearance="outline">
+                    <mat-label>First Name*</mat-label>
+                    <input type="email" matInput formControlName="firstname">
+
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Last Name*</mat-label>
+                    <input type="text" matInput formControlName="lastname">
+
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Mobile No*</mat-label>
+                    <input type="text" matInput formControlName="mobileno">
+
+                </mat-form-field>  
+                <mat-form-field appearance="outline">
+                    <mat-label>EmailId*</mat-label>
+                    <input type="text" matInput formControlName="emailId">
+
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Address*</mat-label>
+                    <input type="text" matInput placeholder="Address" formControlName="address">
+                    <textarea matInput></textarea>
+                </mat-form-field>
+
+            </div>
+            <div>
+                <button mat-button class="log-button" [disabled]="userForm.invalid" matStepperNext>Next</button>
+            </div>
+        </form>
+
+    </mat-step>
+    <mat-step [stepControl]="documentForm">
+     
+        <form [formGroup]="documentForm">
+            <ng-template matStepLabel>Fill out your Bank Details</ng-template>
+            <div fxLayout="column">
+                <mat-form-field appearance="outline">
+                    <mat-label>First Name*</mat-label>
+                    <input type="email" matInput formControlName="accountNo">
+
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Last Name*</mat-label>
+                    <input type="text" matInput formControlName="ifscCode">
+
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Mobile No*</mat-label>
+                    <input type="text" matInput formControlName="pancardNo">
+                </mat-form-field>
+            </div>
+                <div>
+                    <button mat-button matStepperPrevious>Back</button>
+                    <button mat-button matStepperNext>Next</button>
+                </div>
+          
+        </form>
+    
+    </mat-step>
+    <mat-step>
+        <ng-template matStepLabel>Done</ng-template>
+        <p>You are now done.</p>
+        <div>
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button (click)="stepper.reset()">Reset</button>
+        </div>
+    </mat-step>
+</mat-horizontal-stepper>

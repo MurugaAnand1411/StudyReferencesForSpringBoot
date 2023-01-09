@@ -1,0 +1,21 @@
+<!-- New  Dynamic Web -->
+<div style="margin: 20px;" fxLayout="row" fxLayoutAlign="end center">
+    <button mat-button mat-raised-button [routerLink]="['/timesheet/addtimesheet']" color="primary">Add New Timesheet</button>&nbsp;
+</div>
+<div   style="margin:10px;">
+    <app-tables  *ngIf="datea!=null" [tableData]="datea"
+                [tableColumns]="tableColumns" 
+                [tableName]="'Timesheet'" 
+                [tableSpec]="'individualTimesheet'"  
+                [isFilterable]="true"
+                [isPageable]="true"
+                [paginationSizes]="[2,4,6]"
+                [defaultPageSize]="4"
+                (sort)="sort($event)"
+                [rowActionIcon]="'edit'"
+                (update)="editTimesheet($event)"
+                (delete)="deleteTimesheet($event)"
+                (view)="readTimesheet($event)"
+    ></app-tables>
+</div>
+

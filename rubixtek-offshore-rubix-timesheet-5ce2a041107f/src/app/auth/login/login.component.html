@@ -1,0 +1,82 @@
+<div id="bg"></div>
+<div fxLayoutAlign="center center" class="center-content">
+    <mat-card class="card-login">
+
+        <div fxLayoutAlign="center center"  class="header-content">Login / Register</div>
+        <mat-card-content class="card-content">
+            <mat-tab-group>
+                <mat-tab label="Login">
+                    <form [formGroup]="loginForm" class="formStyle" (ngSubmit)="loginForm.valid&&loginUser()">
+                        <mat-form-field class="login-matformfield-borders">
+                            <mat-label>Email Address*</mat-label>
+                            <input type="email" matInput placeholder="Email Address" [(ngModel)]="login.emailId" formControlName="emailId">
+                            <mat-icon color="primary" matSuffix>email</mat-icon>
+                            <mat-error *ngIf="checkError('emailId', 'required')">{{errors.emailId}}</mat-error>
+                            <mat-error *ngIf="checkError('emailId', 'email')">{{errors.validEmail}}</mat-error>
+                        </mat-form-field>
+                        <mat-form-field class="login-matformfield-borders ">
+                            <mat-label>Password*</mat-label>
+                            <input type="password" matInput placeholder="Password" [(ngModel)]="login.password" formControlName="password">
+                            <mat-icon color="primary" matSuffix>vpn_key</mat-icon>
+                            <mat-error *ngIf="checkError('password', 'required')">{{errors.password}}</mat-error>
+                        </mat-form-field>
+                        <button mat-button class="log-button">Login</button>
+                    </form>
+                </mat-tab>
+
+                <mat-tab label="Register">
+
+                    <form [formGroup]="registerForm" class="formStyle" (ngSubmit)="registerForm.valid&&register()">
+
+                        <mat-form-field class="email-matformfield-borders">
+
+                            <mat-label>Email*</mat-label>
+                            <input type="email" matInput placeholder="email"  formControlName="emailId">
+                            <mat-icon color="primary" matSuffix>email</mat-icon>
+                            <mat-error>{{ errorMessage('emailId','Email ID') }}</mat-error>
+                        </mat-form-field>
+
+
+
+                        <mat-form-field class="matformfield-borders">
+
+                            <mat-label>Mobile Number*</mat-label>
+                            <input type="text" matInput placeholder="Mobile Number" formControlName="mobileno" />
+                            <mat-error>{{ errorMessage('mobileno','Mobile Number') }}</mat-error>
+                        </mat-form-field>
+
+
+                        <mat-form-field class="matformfield-borders">
+
+                            <mat-label>Password*</mat-label>
+                            <input matInput [type]="hide ? 'password' : 'text'" placeholder="Password" formControlName="password">
+                            <mat-error>{{ errorMessage('password','Password') }}</mat-error>
+                            <mat-icon color="primary" class="show" matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                            <mat-icon color="primary" class="show" type="button" matSuffix (click)="message()">help_outline</mat-icon>
+
+                        </mat-form-field>
+
+                        <mat-form-field class="matformfield-borders">
+
+                            <mat-label>confirm Password*</mat-label>
+                            <input type="password" matInput placeholder="confirm Password" formControlName="rcpassword">
+                            <mat-error>{{ errorMessage('rcpassword','Confirm Password') }}</mat-error>
+                            <mat-icon color="primary" matSuffix>vpn_key</mat-icon>
+
+                        </mat-form-field>
+
+                       
+
+                        <button type="submit" mat-button class="log-button">Register</button>
+
+                    </form>
+
+                </mat-tab>
+
+            </mat-tab-group>
+
+        </mat-card-content>
+
+    </mat-card>
+
+</div>

@@ -1,0 +1,29 @@
+<!-- <mat-label>For the Month</mat-label>
+<input matInput [matDatepicker]="picker1" name="CalMonth" formControlName="CalMonth">
+<mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+<mat-datepicker #picker1 disabled="false"></mat-datepicker> -->
+
+<mat-form-field appearance="outline">
+    <mat-label>Year*</mat-label>
+    <mat-select [(value)]="selectYear">
+        <mat-option *ngFor="let yea of year" [value]="yea.value">
+            {{yea.text}}
+        </mat-option>
+    </mat-select>
+    <!-- <mat-error *ngIf="checkError('quantitymetrics', 'required')">{{errors.quantitymetrics}} -->
+    <!-- </mat-error> -->
+</mat-form-field>
+<mat-form-field appearance="outline">
+    <mat-label>Month*</mat-label>
+    <mat-select [(value)]="selectMonth">
+        <mat-option *ngFor="let monthes of month" [value]="monthes.value">
+            {{monthes.text}}
+        </mat-option>
+    </mat-select>
+    <!-- <mat-error *ngIf="checkError('quantitymetrics', 'required')">{{errors.quantitymetrics}} -->
+    <!-- </mat-error> -->
+</mat-form-field>
+
+
+
+<!-- <button (click)="generatePdf()">Open PDF</button> -->

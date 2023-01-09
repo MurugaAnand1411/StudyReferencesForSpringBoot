@@ -1,0 +1,18 @@
+<table class="container">
+    <tr>
+        <th></th>
+        <th></th>
+        <th *ngFor="let dat of day">{{dat}}</th>
+    </tr>
+    <tr>
+        <th>Project Name</th>
+        <th>Task Details</th>
+        <th *ngFor="let dat of task.daterange">{{dat.date}}</th>
+    </tr>
+    <tr>
+        <td> {{task.projectname}}</td>
+        <td> {{task.task}}</td>
+        <td *ngFor="let dat of task.daterange">{{dat.hours}} (hr)</td>
+ 
+    </tr>
+</table>

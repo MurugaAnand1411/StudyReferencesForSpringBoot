@@ -1,0 +1,86 @@
+.card-login {
+    margin-top: 20px;
+    max-width: 400px;
+    color: #121412;
+}
+
+.card-content {
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+.header-content {
+    color: rgb(255, 255, 255);
+    background-color: #673ab7;
+    height: 70px !important;
+    text-align: -webkit-center;
+}
+
+.center-content {
+    height: auto;
+    text-align: -webkit-center;
+    margin-bottom: 10px;
+}
+
+.formStyle {
+    margin-top: 20px;
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+}
+
+.email-matformfield-borders {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    width: 100%;
+}
+
+.matformfield-borders {
+    padding-bottom: 20px;
+    width: 100%;
+}
+
+.login-matformfield-borders {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-top: 10px;
+    width: 100%;
+}
+
+.log-button {
+    margin-top: 10px;
+    width: 100%;
+    color: white;
+    height: 40px;
+    background-color: #673ab7;
+}
+
+.show {
+    &:hover {
+        cursor: pointer;
+    }
+    margin-left: 4px;
+}
+
+.emailStyles {
+    color: red;
+}
+.align-block{
+    text-align: left;
+}
+.align-left-block{
+    text-align: right;
+}
+.mat-stepper-horizontal {
+    margin-top: 8px;
+  }
+  
+  .mat-form-field {
+    margin-top: 16px;
+  }
+  .outline{
+      margin-left: 20px;
+  }
+//   .mat-form-field{
+//     margin-left: 60px;
+//   }

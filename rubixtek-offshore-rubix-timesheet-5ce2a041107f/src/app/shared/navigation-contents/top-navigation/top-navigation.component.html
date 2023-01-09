@@ -1,0 +1,42 @@
+<!-- <nav class="navbar fixed-top custom-nav">
+
+  <div>
+    <button type="button" class="btn btn-info" (click)="toggleSidebar()">
+      <mat-icon>menu</mat-icon>
+    </button>
+
+    <a class="navbar-brand text-white" routerLink="/home">&nbsp; Dashboard</a>
+  </div>
+
+  <div>
+    <button mat-flat-button [matMenuTriggerFor]="menu">
+      <mat-icon>account_circle</mat-icon>&nbsp;username
+    </button>
+    <mat-menu #menu="matMenu" class="text-center">
+      <mat-list>
+        <mat-list-item> <a routerLink="/home/profile" routerLinkActive="active">Profile</a> </mat-list-item>
+        <mat-list-item> <span class="btn btn-sm btn-danger" (click)="tokenStorageService.signOut()">Logout</span> </mat-list-item>
+      </mat-list>
+    </mat-menu>
+  </div>
+
+</nav> -->
+
+
+<div class="navbar-container" [class.example-is-mobile]="mobileQuery.matches">
+  <!-- Top navbar -->
+  <mat-toolbar class="navbar" color="primary">
+      <button mat-icon-button >
+          <mat-icon>menu</mat-icon>
+      </button>
+      <a class="navbar-brand" [routerLink]="['/']" matTooltip="Home">
+          <h1 class="styColor">Rubix Timesheet</h1>
+      </a>
+      <span class="navbar-spacer"></span>
+      <button mat-icon-button [routerLink]="['/register']">
+        <mat-icon >perm_identity</mat-icon>
+    </button>
+  </mat-toolbar>
+  <router-outlet></router-outlet>
+ 
+</div>

@@ -1,0 +1,36 @@
+<!-- <input  type="date"  matInput [(ngModel)]="ff" (input)="autoGrow1($event)" >
+            <input  type="date"  matInput [(ngModel)]="ll" (input)="autoGrow2($event)" >  -->
+
+<form [formGroup]="excelForm" >
+            <mat-form-field appearance="outline">
+                <mat-label>Start Date*</mat-label>
+                <input matInput [matDatepicker]="picker1" (dateChange)="autoGrow1()" formControlName="start_date"   [(ngModel)]="ff">
+                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                <mat-datepicker #picker1></mat-datepicker>
+                <mat-error>{{ errorMessage('start_date','Start Date') }}</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>End Date</mat-label>
+                <input matInput [matDatepicker]="picker2" (dateChange)="autoGrow2()" formControlName="end_date"   [(ngModel)]="ll">
+                <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                <mat-datepicker #picker2></mat-datepicker>
+                <mat-error>{{ errorMessage('end_date','End Date') }}</mat-error>
+            </mat-form-field>
+        </form>
+            <div   style="margin:10px;">
+                <app-tables  *ngIf="timesheet!=null" [tableData]="timesheet"
+                            [tableColumns]="tableColumns" 
+                            [tableName]="'Timesheet'" 
+                            [tableSpec]="'timesheetReport'"  
+                            [isFilterable]="true"
+                            [isPageable]="true"
+                            [paginationSizes]="[5,10,15]"
+                            [defaultPageSize]="5"
+                            (sort)="sort($event)"
+                            [timesheetReportIcon]="'edit'"
+                            
+                ></app-tables>
+                <!-- (update)="onApprove($event)"
+                            (delete)="onReject($event)"
+                            (view)="readTimesheet($event)" -->
+            </div>

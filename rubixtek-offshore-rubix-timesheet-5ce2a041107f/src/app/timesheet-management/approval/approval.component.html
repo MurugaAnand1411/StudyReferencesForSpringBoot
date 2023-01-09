@@ -1,0 +1,45 @@
+<h3>Timesheet Details</h3>
+<table>
+    <tr>
+        <td> Employee Name: {{timesheet.employeeName}}</td>
+    </tr>
+    <tr>
+        <td>Date Range: {{timesheet.startDate}}-{{timesheet.endDate}}</td>
+    </tr>
+    <tr>
+        <td>Team Name: {{timesheet.teamname}}</td>
+    </tr>
+</table>
+<table class="container">
+    <tr>
+        <th></th>
+        <th></th>
+        <th *ngFor="let dat of day">{{dat}}</th>
+    </tr>
+    <tr>
+        <th>Project Name</th>
+        <th>Task Details</th>
+        <th *ngFor="let dat of task.daterange">{{dat.date}}</th>
+    </tr>
+    <tr>
+        <td> {{task.projectname}}</td>
+        <td> {{task.task}}</td>
+        <td *ngFor="let dat of task.daterange">{{dat.hours}} (hr)</td>
+ 
+    </tr>
+</table>
+
+<div fxLayout="row" fxLayoutGap="20px"  fxLayoutAlign="end end">
+        <button type="button" (click)="onApprove()"  mat-raised-button color="primary">
+
+            <span>Approve</span>
+        </button>
+        <button type="button" (click)="onReject()" mat-raised-button color="primary">
+
+            <span>Reject</span>
+        </button>
+</div>
+
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#9a58d5" type="line-scale" [fullScreen]="true">
+    <p style="color: white"> Loading... </p>
+</ngx-spinner>

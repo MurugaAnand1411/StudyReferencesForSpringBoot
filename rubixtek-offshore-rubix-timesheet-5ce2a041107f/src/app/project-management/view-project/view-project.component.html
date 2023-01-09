@@ -1,0 +1,17 @@
+<div class="card" style="margin: 20px;" *ngIf="project!=null">
+    <div class="card-header">
+        <h4 class="card-title">Project Details</h4>
+    </div>
+    <div class="card-content">
+        <div class="card-body">
+            <p mat-line>Client Name : {{project.clientName}}</p>
+            <p mat-line>Project Name : {{project.projectName}}</p>
+            <p mat-line>Project Type: {{project.projectType}}</p>
+            <p mat-line>Project Description : {{project.projectDescription}}</p>
+            <p mat-line>Project Manager : {{project.projectManager}}</p>
+            <p mat-line>Start Date : {{project.startDate}}</p>
+            <p mat-line>End Date : {{project.endDate}}</p>
+
+        </div>
+    </div>
+</div>

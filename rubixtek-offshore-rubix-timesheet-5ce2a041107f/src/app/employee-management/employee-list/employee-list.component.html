@@ -1,0 +1,20 @@
+<div style="margin: 20px;" fxLayout="row" fxLayoutAlign="end center">
+    <button mat-button mat-raised-button [routerLink]="['/admin/add-employee']" color="primary">Add Employee</button>&nbsp;
+</div>
+<div   style="margin:10px;">
+    <app-tables  *ngIf="employee!=null" [tableData]="employee"
+                [tableColumns]="tableColumns" 
+                [tableName]="'Employee Management'" 
+                [tableSpec]="'employeeList'"  
+                [isFilterable]="true"
+                [isPageable]="true"
+                [paginationSizes]="[2,4,6]"
+                [defaultPageSize]="4"
+                (sort)="sort($event)"
+                [employeeIcon]="'edit'"
+                (update)="editEmployee($event)"
+                (delete)="deleteEmployee($event)"
+                (view)="readEmployee($event)"
+    ></app-tables>
+</div>
+<!-- pending_actions -->

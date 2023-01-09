@@ -1,0 +1,213 @@
+<!-- <div fxLayout="row" fxLayoutAlign="end center">
+   
+    <div fxLayout="column" fxFlex="32" fxFlex.xs="20%" fxFlex.sm="3%" fxLayoutAlign="start start">
+        Project Name
+       
+    </div>
+    <div class="areww" fxLayout="column" fxFlex="25%" fxFlex.xs="20%" fxFlex.sm="33%" fxLayoutAlign="start start">
+        Task Detail
+       
+    </div>
+    <div fxLayout="column" fxFlex="12%" fxFlex.xs="20%" fxFlex.sm="3%" fxLayoutAlign="start end">
+        <table class="space">
+            <tr>
+
+                <th *ngFor="let range of day">{{range}}</th>
+            </tr>
+            <tr>
+
+
+                <th *ngFor="let range of datRange">{{range}}</th>
+            </tr>
+
+        </table>
+    </div>
+
+</div> -->
+<!-- 
+<div>
+    <form [formGroup]="timesheetDetailForm" (ngSubmit)=timesheetDetailForm.valid&&onSubmit()>
+
+        <div fxLayout="row" fxLayoutAlign="end center">
+           
+            <div class="form-block1" fxLayout="column" fxFlex="32" fxFlex.xs="20%" fxFlex.sm="3%"
+                fxLayoutAlign="start end">
+                <mat-form-field class="fieldspacing">
+                    <mat-label>Project Name</mat-label>
+                    <input [errorStateMatcher]="errorMatcher" type="text" matInput formControlName="projectname"
+                        matInput required>
+                    <mat-error>{{ errorMessage('projectname','Project Name') }}</mat-error>
+                </mat-form-field>
+
+            </div>
+            <div class="form-block1" fxLayout="column" fxFlex="25%" fxFlex.xs="20%" fxFlex.sm="33%"
+                fxLayoutAlign="start end">
+                <mat-form-field class="fieldspacing">
+                    <mat-label>Task</mat-label>
+                    <input [errorStateMatcher]="errorMatcher" type="text" matInput formControlName="task" required>
+                    <mat-error>{{ errorMessage('task','Task') }}</mat-error>
+                </mat-form-field>
+
+            </div>
+            <ng-container formArrayName="daterange">
+                <div class="form-block2">
+                    <div class="form-block3" *ngFor="let group of dateArray.controls; let i = index;"
+                        [formGroupName]="i" fxFlex="12%" fxFlex.xs="20%" fxFlex.sm="3%" fxLayoutAlign="start end">
+                        <mat-form-field class="hourspacing">                       
+                                    <input type="text" matInput formControlName="hours">
+                            <mat-error>{{ arrayErrorMessage(i,'hours','Hours') }}</mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </ng-container> 
+
+
+        </div>
+        <div fxLayoutAlign="end">
+            <button type="submit" mat-raised-button color="primary">
+
+                <span>Save</span>
+            </button>
+        </div>
+    </form>
+</div>
+
+
+<div fxLayoutAlign="end">
+    <button *ngIf="saved" (click)="submitForApproval()" type="button" mat-raised-button color="primary">
+
+        <span>Submit for Approval</span>
+    </button>
+</div> -->
+
+
+
+<!-- Table View -->
+
+
+
+
+<form [formGroup]="timesheetDetailForm" (ngSubmit)=timesheetDetailForm.valid&&onSubmit()>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col" colspan="2"></th>
+                <th *ngFor="let range of day">{{range}}</th>
+                <th scope="col">Total</th>
+            </tr>
+            <tr>
+                <th scope="col" rowspan="2">Project Name</th>
+                <th scope="col" rowspan="2">Task Details</th>
+                <th scope="col" *ngFor="let range of datRange">{{range}}</th>
+                <th scope="col">Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+
+                <td scope="row">
+                    <mat-form-field class="fieldspacing">
+                        <mat-select  formControlName="projectname" >
+                                    <mat-option *ngFor="let pro of project" [value]="pro.projectName+'('+pro.projectId+')'">
+                                      {{pro.projectName}}({{pro.projectId}})
+                                    </mat-option>
+                                  </mat-select>
+                        <!-- <input matInput formControlName="projectname"> -->
+                        <mat-error>{{errorMessage('projectname','Project Name')}}</mat-error>
+                    </mat-form-field>
+                </td>
+                <td>
+                    <mat-form-field class="fieldspacing">
+                        <input matInput formControlName="task">
+                        <mat-error>{{errorMessage('task','Task')}}</mat-error>
+                    </mat-form-field>
+                </td>
+                <ng-container formArrayName="daterange">
+                    <td *ngFor="let group of dateArray.controls; let i = index;" [formGroupName]="i">
+                        <mat-form-field class="hourspacing" appearance="outline">
+                            <input matInput (keyup)="getBillingHours()" formControlName="hours" placeholder="Hr">
+                            <mat-error>{{ arrayErrorMessage(i,dateArray,'hours','Hours') }}</mat-error>
+                        </mat-form-field>
+                    </td>
+                </ng-container>
+                <td>
+                    <div class="total-spacing">
+                        {{total_daily_hour}}
+                    </div>
+                </td>
+            </tr>
+            <!-- <tr>
+
+                <td scope="row">
+                    Holiday/Time Off
+                </td>
+                <td>
+
+                </td>
+                <ng-container formArrayName="holidaytimeoff">
+                    <td *ngFor="let group of holidayArray.controls; let i = index;" [formGroupName]="i">
+                        <mat-form-field class="hourspacing" appearance="outline">
+                            <input matInput formControlName="hours" (keyup)="getHolidayHours()" placeholder="Hr">
+                            <mat-error>{{ arrayErrorMessage(i,holidayArray,'hours','Hours') }}</mat-error>
+                        </mat-form-field>
+                    </td>
+                </ng-container>
+                <td>
+                    <div class="total-spacing">
+                        {{total_holiday_hour}}
+                    </div>
+                </td>
+            </tr>
+            <tr>
+
+                <td scope="row">
+                    Apply Time Off
+                <td>
+
+                </td>
+                <ng-container formArrayName="applytimeoff">
+                    <td *ngFor="let group of timeOffArray.controls; let i = index;" [formGroupName]="i">
+                        <mat-form-field class="hourspacing" appearance="outline">
+                            <input matInput formControlName="hours" (keyup)="getTimeoffHours()" placeholder="Hr">
+                            <mat-error>{{ arrayErrorMessage(i,timeOffArray,'hours','Hours') }}</mat-error>
+                        </mat-form-field>
+                    </td>
+                </ng-container>
+                <td>
+                    <div class="total-spacing">
+                        {{total_timeoff_hour}}
+                    </div>
+
+                </td>
+            </tr> -->
+            <tr>
+                <td>Total Billing Hours</td>
+                <td></td>
+                <ng-container formArrayName="daterange">
+                    <td *ngFor="let group of dateArray.controls; let i = index;" [formGroupName]="i">
+
+                    </td>
+                </ng-container>
+
+                <td>
+                    <div class="total-spacing">{{total_hours}}</div>
+
+                </td>
+            </tr>
+        </tbody>
+
+    </table>
+    <div fxLayoutGap="20px" fxLayout="row" fxLayoutAlign="end">
+        <button type="submit" mat-raised-button color="primary">
+
+            <span>Save</span>
+        </button>
+        <button *ngIf="saved" (click)="submitForApproval()" type="button" mat-raised-button color="primary">
+
+            <span>Submit for Approval</span>
+        </button>
+    </div>
+</form>
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#9a58d5" type="line-scale" [fullScreen]="true">
+    <p style="color: white"> Saving... </p>
+</ngx-spinner>

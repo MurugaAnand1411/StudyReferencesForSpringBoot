@@ -1,0 +1,20 @@
+
+<div   style="margin:10px;">
+    <app-tables  *ngIf="timesheet!=null" [tableData]="timesheet"
+                [tableColumns]="tableColumns" 
+                [tableName]="'Timesheet Approval'" 
+                [tableSpec]="'timesheetApproval'"  
+                [isFilterable]="true"
+                [isPageable]="true"
+                [paginationSizes]="[2,4,6]"
+                [defaultPageSize]="4"
+                (sort)="sort($event)"
+                [rowTimesheetAppIcon]="'edit'"
+                (update)="onApprove($event)"
+                (delete)="onReject($event)"
+                (view)="readTimesheet($event)"
+    ></app-tables>
+</div>
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#9a58d5" type="line-scale" [fullScreen]="true">
+    <p style="color: white"> Loading... </p>
+</ngx-spinner>
